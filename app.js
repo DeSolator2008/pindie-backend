@@ -14,7 +14,7 @@ app.use(
   cors,
   cookieParser(),
   bodyParser.json(),
-  pagesRouter, 
+  pageRouter, 
   apiRouter,
   express.static(path.join(__dirname, "public"))
 );
