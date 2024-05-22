@@ -17,7 +17,7 @@ form &&
         throw new Error((await response.json()).message);
       }
       const result = await response.json();
-      document.cookie = `jwt=${result.jwt}`;
+      console.log("=>(login.js:20) result", result);
       window.location.href = "/admin/dashboard";
     } catch (error) {
       showTooltip(error.message);
