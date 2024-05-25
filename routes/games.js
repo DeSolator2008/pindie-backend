@@ -9,14 +9,15 @@ const {
   checkIfUsersAreSafe,
   updateGame,
   deleteGame,
-  checkEmptyFields
+  checkEmptyFields,
+  checkIsVoteRequest,
 } = require("../middlewares/games.js");
 const {
   sendAllGames,
   sendGameById,
   sendGameCreated,
   sendGameUpdated,
-  sendGameDeleted
+  sendGameDeleted,
 } = require("../controllers/games.js");
 const { checkAuth } = require("../middlewares/auth.js");
 
@@ -35,6 +36,7 @@ gamesRouter.get("/games/:id", findGameById, sendGameById);
 gamesRouter.put(
   "/games/:id",
   findGameById,
+  checkIsVoteRequest,
   checkIfUsersAreSafe,
   checkIfCategoriesAvaliable,
   checkEmptyFields,

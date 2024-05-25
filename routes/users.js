@@ -17,7 +17,7 @@ const {
   sendUserCreated,
   sendUserUpdated,
   sendUserDeleted,
-  sendMe
+  sendMe,
 } = require("../controllers/users.js");
 const { checkAuth } = require("../middlewares/auth.js");
 
