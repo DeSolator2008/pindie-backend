@@ -1,20 +1,9 @@
-const pagesRouter = require("express").Router(); 
-const path = require("path");
-const { sendIndex } = require("../controllers/auth.js");
+const pagesRouter = require("express").Router();
+const { checkCookiesJWT, checkAuth } = require("../middlewares/auth");
+const { sendIndex, sendDashboard } = require("../controllers/auth");
 
-pagesRouter.get("/", sendIndex); 
-const sendIndex = (req, res) => {
-  if (req.cookies.jwt) {
-    try {
-      jwt.verify(req.cookies.jwt, "some-secret-key");
-      return res.redirect("/admin/dashboard");
-    } catch (err) {
-      res.sendFile(path.join(__dirname, "../public/index.html"));
-    }
-  }
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-}; 
+pagesRouter.get("/admin/**", checkCookiesJWT, checkAuth, sendDashboard);
 
-pagesRouter.get("/admin/**", checkCookiesJWT, checkAuth, sendDashboard); 
+pagesRouter.get("/", sendIndex);
 
-module.exports = pagesRouter; 
+module.exports = pagesRouter;
